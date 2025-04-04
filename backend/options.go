@@ -4,11 +4,11 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/cschleiden/go-workflows/backend/converter"
-	"github.com/cschleiden/go-workflows/backend/metrics"
-	mi "github.com/cschleiden/go-workflows/internal/metrics"
-	"github.com/cschleiden/go-workflows/internal/propagators"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/backend/converter"
+	"github.com/nerdynz/go-workflows/backend/metrics"
+	mi "github.com/nerdynz/go-workflows/internal/metrics"
+	"github.com/nerdynz/go-workflows/internal/propagators"
+	"github.com/nerdynz/go-workflows/workflow"
 	"go.opentelemetry.io/otel/trace"
 	"go.opentelemetry.io/otel/trace/noop"
 )

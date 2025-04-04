@@ -5,10 +5,10 @@ package backend
 import (
 	context "context"
 
-	history "github.com/cschleiden/go-workflows/backend/history"
-	core "github.com/cschleiden/go-workflows/core"
+	history "github.com/nerdynz/go-workflows/backend/history"
+	core "github.com/nerdynz/go-workflows/core"
 
-	metrics "github.com/cschleiden/go-workflows/backend/metrics"
+	metrics "github.com/nerdynz/go-workflows/backend/metrics"
 
 	mock "github.com/stretchr/testify/mock"
 

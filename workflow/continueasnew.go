@@ -3,10 +3,10 @@ package workflow
 import (
 	"fmt"
 
-	"github.com/cschleiden/go-workflows/backend/metadata"
-	a "github.com/cschleiden/go-workflows/internal/args"
-	"github.com/cschleiden/go-workflows/internal/contextvalue"
-	"github.com/cschleiden/go-workflows/internal/continueasnew"
+	"github.com/nerdynz/go-workflows/backend/metadata"
+	a "github.com/nerdynz/go-workflows/internal/args"
+	"github.com/nerdynz/go-workflows/internal/contextvalue"
+	"github.com/nerdynz/go-workflows/internal/continueasnew"
 )
 
 // ContinueAsNew restarts the current workflow with the given arguments.

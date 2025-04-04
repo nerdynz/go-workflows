@@ -7,10 +7,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cschleiden/go-workflows/backend"
-	"github.com/cschleiden/go-workflows/backend/history"
-	"github.com/cschleiden/go-workflows/backend/test"
 	"github.com/google/uuid"
+	"github.com/nerdynz/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/backend/history"
+	"github.com/nerdynz/go-workflows/backend/test"
 )
 
 const testUser = "root"

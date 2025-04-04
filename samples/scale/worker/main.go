@@ -7,10 +7,10 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/cschleiden/go-workflows/backend"
-	"github.com/cschleiden/go-workflows/samples"
-	scale "github.com/cschleiden/go-workflows/samples/scale"
-	"github.com/cschleiden/go-workflows/worker"
+	"github.com/nerdynz/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/samples"
+	scale "github.com/nerdynz/go-workflows/samples/scale"
+	"github.com/nerdynz/go-workflows/worker"
 )
 
 func main() {

@@ -5,9 +5,9 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/cschleiden/go-workflows/internal/sync"
-	"github.com/cschleiden/go-workflows/internal/workflowerrors"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/internal/sync"
+	"github.com/nerdynz/go-workflows/internal/workflowerrors"
+	"github.com/nerdynz/go-workflows/workflow"
 	"github.com/stretchr/testify/require"
 )
 

@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/cschleiden/go-workflows/core"
-	"github.com/cschleiden/go-workflows/diag"
-	"github.com/cschleiden/go-workflows/internal/log"
+	"github.com/nerdynz/go-workflows/core"
+	"github.com/nerdynz/go-workflows/diag"
+	"github.com/nerdynz/go-workflows/internal/log"
 	redis "github.com/redis/go-redis/v9"
 )
 

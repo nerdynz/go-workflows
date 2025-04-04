@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/workflow"
 )
 
 type myKey int

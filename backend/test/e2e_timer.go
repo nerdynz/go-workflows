@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cschleiden/go-workflows/backend/history"
-	"github.com/cschleiden/go-workflows/client"
-	"github.com/cschleiden/go-workflows/worker"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/backend/history"
+	"github.com/nerdynz/go-workflows/client"
+	"github.com/nerdynz/go-workflows/worker"
+	"github.com/nerdynz/go-workflows/workflow"
 	"github.com/stretchr/testify/require"
 )
 

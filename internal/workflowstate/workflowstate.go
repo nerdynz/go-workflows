@@ -6,12 +6,12 @@ import (
 	"time"
 
 	"github.com/benbjohnson/clock"
-	"github.com/cschleiden/go-workflows/backend/converter"
-	"github.com/cschleiden/go-workflows/backend/payload"
-	"github.com/cschleiden/go-workflows/core"
-	"github.com/cschleiden/go-workflows/internal/command"
-	"github.com/cschleiden/go-workflows/internal/log"
-	"github.com/cschleiden/go-workflows/internal/sync"
+	"github.com/nerdynz/go-workflows/backend/converter"
+	"github.com/nerdynz/go-workflows/backend/payload"
+	"github.com/nerdynz/go-workflows/core"
+	"github.com/nerdynz/go-workflows/internal/command"
+	"github.com/nerdynz/go-workflows/internal/log"
+	"github.com/nerdynz/go-workflows/internal/sync"
 	"go.opentelemetry.io/otel/trace"
 )
 

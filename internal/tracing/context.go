@@ -1,7 +1,7 @@
 package tracing
 
 import (
-	"github.com/cschleiden/go-workflows/internal/sync"
+	"github.com/nerdynz/go-workflows/internal/sync"
 	"go.opentelemetry.io/otel/trace"
 )
 

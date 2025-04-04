@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/cschleiden/go-workflows/backend/history"
-	"github.com/cschleiden/go-workflows/core"
+	"github.com/nerdynz/go-workflows/backend/history"
+	"github.com/nerdynz/go-workflows/core"
 	"github.com/redis/go-redis/v9"
 )
 

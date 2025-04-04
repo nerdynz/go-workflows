@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 
-	"github.com/cschleiden/go-workflows/activity"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/activity"
+	"github.com/nerdynz/go-workflows/workflow"
 )
 
 func Workflow1(ctx workflow.Context, msg string) (int, error) {

@@ -3,7 +3,7 @@ package postgresbackend
 import (
 	"database/sql"
 
-	"github.com/cschleiden/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/backend"
 )
 
 type options struct {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/cschleiden/go-workflows/internal/log"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/internal/log"
+	"github.com/nerdynz/go-workflows/workflow"
 )
 
 type ActivityState struct {

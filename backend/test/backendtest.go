@@ -6,15 +6,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cschleiden/go-workflows/backend"
-	"github.com/cschleiden/go-workflows/backend/history"
-	"github.com/cschleiden/go-workflows/backend/metadata"
-	"github.com/cschleiden/go-workflows/backend/payload"
-	"github.com/cschleiden/go-workflows/client"
-	"github.com/cschleiden/go-workflows/core"
-	"github.com/cschleiden/go-workflows/diag"
-	"github.com/cschleiden/go-workflows/workflow"
 	"github.com/google/uuid"
+	"github.com/nerdynz/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/backend/history"
+	"github.com/nerdynz/go-workflows/backend/metadata"
+	"github.com/nerdynz/go-workflows/backend/payload"
+	"github.com/nerdynz/go-workflows/client"
+	"github.com/nerdynz/go-workflows/core"
+	"github.com/nerdynz/go-workflows/diag"
+	"github.com/nerdynz/go-workflows/workflow"
 	"github.com/stretchr/testify/require"
 )
 

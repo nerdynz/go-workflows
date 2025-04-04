@@ -3,8 +3,8 @@ package sqlite
 import (
 	"testing"
 
-	"github.com/cschleiden/go-workflows/backend"
-	"github.com/cschleiden/go-workflows/backend/test"
+	"github.com/nerdynz/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/backend/test"
 	"github.com/stretchr/testify/require"
 )
 

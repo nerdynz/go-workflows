@@ -5,13 +5,13 @@ import (
 	"log"
 	"time"
 
-	"github.com/cschleiden/go-workflows/activity"
-	"github.com/cschleiden/go-workflows/backend"
-	"github.com/cschleiden/go-workflows/client"
-	"github.com/cschleiden/go-workflows/samples"
-	"github.com/cschleiden/go-workflows/worker"
-	"github.com/cschleiden/go-workflows/workflow"
 	"github.com/google/uuid"
+	"github.com/nerdynz/go-workflows/activity"
+	"github.com/nerdynz/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/client"
+	"github.com/nerdynz/go-workflows/samples"
+	"github.com/nerdynz/go-workflows/worker"
+	"github.com/nerdynz/go-workflows/workflow"
 )
 
 func main() {

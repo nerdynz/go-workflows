@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/cschleiden/go-workflows/core"
+	"github.com/nerdynz/go-workflows/core"
 )
 
 func (rb *redisBackend) setWorkflowInstanceExpiration(ctx context.Context, instance *core.WorkflowInstance, expiration time.Duration) error {

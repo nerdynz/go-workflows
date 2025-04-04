@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/cschleiden/go-workflows/activity"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/activity"
+	"github.com/nerdynz/go-workflows/workflow"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"

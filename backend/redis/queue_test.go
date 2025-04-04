@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cschleiden/go-workflows/core"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/core"
+	"github.com/nerdynz/go-workflows/workflow"
 	"github.com/redis/go-redis/v9"
 	"github.com/stretchr/testify/require"
 )

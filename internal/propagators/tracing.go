@@ -3,8 +3,8 @@ package propagators
 import (
 	"context"
 
-	"github.com/cschleiden/go-workflows/internal/tracing"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/internal/tracing"
+	"github.com/nerdynz/go-workflows/workflow"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/trace"
 )

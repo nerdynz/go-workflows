@@ -8,11 +8,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/cschleiden/go-workflows/backend"
-	"github.com/cschleiden/go-workflows/backend/mysql"
-	"github.com/cschleiden/go-workflows/backend/redis"
-	"github.com/cschleiden/go-workflows/backend/sqlite"
-	"github.com/cschleiden/go-workflows/diag"
+	"github.com/nerdynz/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/backend/mysql"
+	"github.com/nerdynz/go-workflows/backend/redis"
+	"github.com/nerdynz/go-workflows/backend/sqlite"
+	"github.com/nerdynz/go-workflows/diag"
 	redisv9 "github.com/redis/go-redis/v9"
 )
 

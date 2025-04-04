@@ -6,11 +6,11 @@ import (
 	"reflect"
 	"runtime/debug"
 
-	"github.com/cschleiden/go-workflows/backend/payload"
-	"github.com/cschleiden/go-workflows/internal/args"
-	"github.com/cschleiden/go-workflows/internal/contextvalue"
-	"github.com/cschleiden/go-workflows/internal/sync"
-	"github.com/cschleiden/go-workflows/internal/workflowerrors"
+	"github.com/nerdynz/go-workflows/backend/payload"
+	"github.com/nerdynz/go-workflows/internal/args"
+	"github.com/nerdynz/go-workflows/internal/contextvalue"
+	"github.com/nerdynz/go-workflows/internal/sync"
+	"github.com/nerdynz/go-workflows/internal/workflowerrors"
 )
 
 type workflow struct {

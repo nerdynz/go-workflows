@@ -1,6 +1,6 @@
 package backend
 
-import "github.com/cschleiden/go-workflows/workflow"
+import "github.com/nerdynz/go-workflows/workflow"
 
 type Stats struct {
 	ActiveWorkflowInstances int64

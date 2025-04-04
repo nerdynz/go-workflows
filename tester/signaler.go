@@ -3,8 +3,8 @@ package tester
 import (
 	"context"
 
-	"github.com/cschleiden/go-workflows/core"
-	"github.com/cschleiden/go-workflows/internal/signals"
+	"github.com/nerdynz/go-workflows/core"
+	"github.com/nerdynz/go-workflows/internal/signals"
 )
 
 type signaler[T any] struct {

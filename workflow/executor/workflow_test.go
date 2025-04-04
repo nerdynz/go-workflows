@@ -4,10 +4,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/cschleiden/go-workflows/backend/converter"
-	"github.com/cschleiden/go-workflows/internal/contextvalue"
-	"github.com/cschleiden/go-workflows/internal/sync"
-	"github.com/cschleiden/go-workflows/internal/workflowerrors"
+	"github.com/nerdynz/go-workflows/backend/converter"
+	"github.com/nerdynz/go-workflows/internal/contextvalue"
+	"github.com/nerdynz/go-workflows/internal/sync"
+	"github.com/nerdynz/go-workflows/internal/workflowerrors"
 	"github.com/stretchr/testify/require"
 )
 

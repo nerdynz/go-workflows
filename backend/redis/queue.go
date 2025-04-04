@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/cschleiden/go-workflows/workflow"
 	"github.com/google/uuid"
+	"github.com/nerdynz/go-workflows/workflow"
 	"github.com/redis/go-redis/v9"
 )
 

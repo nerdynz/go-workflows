@@ -4,8 +4,8 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/cschleiden/go-workflows/core"
-	"github.com/cschleiden/go-workflows/internal/activity"
+	"github.com/nerdynz/go-workflows/core"
+	"github.com/nerdynz/go-workflows/internal/activity"
 )
 
 // WithActivityTestState returns a context with an activity state attached that can be used for unit testing

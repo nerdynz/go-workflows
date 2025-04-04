@@ -3,7 +3,7 @@ package client
 import (
 	"context"
 
-	"github.com/cschleiden/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/backend"
 )
 
 // GetStats returns backend stats.

@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/cschleiden/go-workflows/client"
-	"github.com/cschleiden/go-workflows/diag"
+	"github.com/nerdynz/go-workflows/client"
+	"github.com/nerdynz/go-workflows/diag"
 	"github.com/stretchr/testify/require"
 )
 

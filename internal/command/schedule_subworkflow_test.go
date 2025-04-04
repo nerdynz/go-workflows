@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/benbjohnson/clock"
-	"github.com/cschleiden/go-workflows/backend/history"
-	"github.com/cschleiden/go-workflows/backend/metadata"
-	"github.com/cschleiden/go-workflows/backend/payload"
-	"github.com/cschleiden/go-workflows/core"
 	"github.com/google/uuid"
+	"github.com/nerdynz/go-workflows/backend/history"
+	"github.com/nerdynz/go-workflows/backend/metadata"
+	"github.com/nerdynz/go-workflows/backend/payload"
+	"github.com/nerdynz/go-workflows/core"
 	"github.com/stretchr/testify/require"
 )
 

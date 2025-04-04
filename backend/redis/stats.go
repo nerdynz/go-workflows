@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/cschleiden/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/backend"
 )
 
 func (rb *redisBackend) GetStats(ctx context.Context) (*backend.Stats, error) {

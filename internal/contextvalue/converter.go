@@ -1,8 +1,8 @@
 package contextvalue
 
 import (
-	"github.com/cschleiden/go-workflows/backend/converter"
-	"github.com/cschleiden/go-workflows/internal/sync"
+	"github.com/nerdynz/go-workflows/backend/converter"
+	"github.com/nerdynz/go-workflows/internal/sync"
 )
 
 type converterKey struct{}

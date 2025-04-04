@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/cschleiden/go-workflows/internal/command"
-	"github.com/cschleiden/go-workflows/internal/contextvalue"
-	"github.com/cschleiden/go-workflows/internal/sync"
-	"github.com/cschleiden/go-workflows/internal/tracing"
-	"github.com/cschleiden/go-workflows/internal/workflowstate"
+	"github.com/nerdynz/go-workflows/internal/command"
+	"github.com/nerdynz/go-workflows/internal/contextvalue"
+	"github.com/nerdynz/go-workflows/internal/sync"
+	"github.com/nerdynz/go-workflows/internal/tracing"
+	"github.com/nerdynz/go-workflows/internal/workflowstate"
 )
 
 type timerConfig struct {

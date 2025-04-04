@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/cschleiden/go-workflows/tester"
 	"github.com/google/uuid"
+	"github.com/nerdynz/go-workflows/tester"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

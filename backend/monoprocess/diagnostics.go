@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/cschleiden/go-workflows/core"
-	"github.com/cschleiden/go-workflows/diag"
+	"github.com/nerdynz/go-workflows/core"
+	"github.com/nerdynz/go-workflows/diag"
 )
 
 var _ diag.Backend = (*monoprocessBackend)(nil)

@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/benbjohnson/clock"
-	"github.com/cschleiden/go-workflows/backend/history"
-	"github.com/cschleiden/go-workflows/internal/tracing"
+	"github.com/nerdynz/go-workflows/backend/history"
+	"github.com/nerdynz/go-workflows/internal/tracing"
 )
 
 type ScheduleTimerCommand struct {

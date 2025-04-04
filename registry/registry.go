@@ -6,9 +6,9 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/cschleiden/go-workflows/internal/args"
-	"github.com/cschleiden/go-workflows/internal/fn"
-	wf "github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/internal/args"
+	"github.com/nerdynz/go-workflows/internal/fn"
+	wf "github.com/nerdynz/go-workflows/workflow"
 )
 
 type Registry struct {

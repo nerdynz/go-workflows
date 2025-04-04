@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cschleiden/go-workflows/core"
 	"github.com/google/uuid"
+	"github.com/nerdynz/go-workflows/core"
 	"github.com/stretchr/testify/require"
 )
 

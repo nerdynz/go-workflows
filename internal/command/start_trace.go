@@ -2,8 +2,8 @@ package command
 
 import (
 	"github.com/benbjohnson/clock"
-	"github.com/cschleiden/go-workflows/backend/history"
-	"github.com/cschleiden/go-workflows/backend/payload"
+	"github.com/nerdynz/go-workflows/backend/history"
+	"github.com/nerdynz/go-workflows/backend/payload"
 )
 
 type StartTraceCommand struct {

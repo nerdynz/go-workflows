@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/cschleiden/go-workflows/backend"
-	"github.com/cschleiden/go-workflows/core"
+	"github.com/nerdynz/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/core"
 )
 
 func (b *sqliteBackend) GetStats(ctx context.Context) (*backend.Stats, error) {

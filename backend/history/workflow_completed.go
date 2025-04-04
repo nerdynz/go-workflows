@@ -1,8 +1,8 @@
 package history
 
 import (
-	"github.com/cschleiden/go-workflows/backend/payload"
-	"github.com/cschleiden/go-workflows/internal/workflowerrors"
+	"github.com/nerdynz/go-workflows/backend/payload"
+	"github.com/nerdynz/go-workflows/internal/workflowerrors"
 )
 
 type ExecutionCompletedAttributes struct {

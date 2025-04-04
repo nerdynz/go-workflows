@@ -7,13 +7,13 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/cschleiden/go-workflows/backend"
-	"github.com/cschleiden/go-workflows/backend/history"
-	"github.com/cschleiden/go-workflows/core"
-	"github.com/cschleiden/go-workflows/internal/log"
-	"github.com/cschleiden/go-workflows/internal/propagators"
-	"github.com/cschleiden/go-workflows/internal/workflowerrors"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/backend"
+	"github.com/nerdynz/go-workflows/backend/history"
+	"github.com/nerdynz/go-workflows/core"
+	"github.com/nerdynz/go-workflows/internal/log"
+	"github.com/nerdynz/go-workflows/internal/propagators"
+	"github.com/nerdynz/go-workflows/internal/workflowerrors"
+	"github.com/nerdynz/go-workflows/workflow"
 	"github.com/redis/go-redis/v9"
 )
 

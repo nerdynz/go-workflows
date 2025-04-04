@@ -5,10 +5,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/cschleiden/go-workflows/backend/history"
-	"github.com/cschleiden/go-workflows/backend/metrics"
-	"github.com/cschleiden/go-workflows/core"
-	"github.com/cschleiden/go-workflows/workflow"
+	"github.com/nerdynz/go-workflows/backend/history"
+	"github.com/nerdynz/go-workflows/backend/metrics"
+	"github.com/nerdynz/go-workflows/core"
+	"github.com/nerdynz/go-workflows/workflow"
 	"go.opentelemetry.io/otel/trace"
 )
 
