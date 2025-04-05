@@ -29,11 +29,11 @@ CREATE TABLE IF NOT EXISTS pending_events (
   timestamp TIMESTAMP NOT NULL,
   schedule_event_id BIGINT NOT NULL,
   attributes BYTEA NOT NULL,
-  visible_at TIMESTAMP,
-
-  INDEX idx_pending_events_inid_exid (instance_id, execution_id),
-  INDEX idx_pending_events_inid_exid_visible_at_schedule_event_id (instance_id, execution_id, visible_at, schedule_event_id)
+  visible_at TIMESTAMP
 );
+
+CREATE INDEX idx_pending_events_inid_exid ON pending_events (instance_id, execution_id);
+CREATE INDEX idx_pending_events_inid_exid_visible_at_schedule_event_id ON pending_events (instance_id, execution_id, visible_at, schedule_event_id);
 
 CREATE TABLE IF NOT EXISTS history (
   id BIGSERIAL PRIMARY KEY,
