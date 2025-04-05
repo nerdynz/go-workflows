@@ -59,7 +59,35 @@ func NewPostgresBackend(host string, port int, user, password, database string, 
 	}
 
 	b := &postgresBackend{
-		dsn:        dsn,
+		db:         db,
+		workerName: fmt.Sprintf("worker-%v", uuid.NewString()),
+		options:    options,
+	}
+
+	if options.ApplyMigrations {
+		if err := b.Migrate(); err != nil {
+			panic(err)
+		}
+	}
+
+	return b
+}
+
+func NewPostgresBackendWithDb(db *sql.DB, opts ...option) *postgresBackend {
+	options := &options{
+		Options:         backend.ApplyOptions(),
+		ApplyMigrations: true,
+	}
+
+	for _, opt := range opts {
+		opt(options)
+	}
+
+	if options.PostgreSQLOptions != nil {
+		options.PostgreSQLOptions(db)
+	}
+
+	b := &postgresBackend{
 		db:         db,
 		workerName: fmt.Sprintf("worker-%v", uuid.NewString()),
 		options:    options,
@@ -75,7 +103,6 @@ func NewPostgresBackend(host string, port int, user, password, database string, 
 }
 
 type postgresBackend struct {
-	dsn        string
 	db         *sql.DB
 	workerName string
 	options    *options
@@ -90,11 +117,7 @@ func (mb *postgresBackend) Close() error {
 
 // Migrate applies any pending database migrations.
 func (mb *postgresBackend) Migrate() error {
-	schemaDsn := mb.dsn
-	db, err := sql.Open("pgx", schemaDsn)
-	if err != nil {
-		return fmt.Errorf("opening schema database: %w", err)
-	}
+	db := mb.db
 
 	dbi, err := postgres.WithInstance(db, &postgres.Config{})
 	if err != nil {
