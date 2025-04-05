@@ -45,11 +45,11 @@ CREATE TABLE IF NOT EXISTS history (
   timestamp TIMESTAMP NOT NULL,
   schedule_event_id BIGINT NOT NULL,
   attributes BYTEA NOT NULL,
-  visible_at TIMESTAMP,
-
-  INDEX idx_history_instance_id_execution_id (instance_id, execution_id),
-  INDEX idx_history_instance_id_execution_id_sequence_id (instance_id, execution_id, sequence_id)
+  visible_at TIMESTAMP
 );
+
+CREATE INDEX idx_history_instance_id_execution_id ON history (instance_id, execution_id);
+CREATE INDEX idx_history_instance_id_execution_id_sequence_id ON history (instance_id, execution_id, sequence_id);
 
 CREATE TABLE IF NOT EXISTS activities (
   id BIGSERIAL PRIMARY KEY,
