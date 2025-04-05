@@ -2,11 +2,11 @@
 ALTER TABLE instances DROP COLUMN queue;
 
 -- Update index
-DROP INDEX idx_instances_locked_until_completed_at_queue;
+DROP INDEX IF EXISTS idx_instances_locked_until_completed_at_queue;
 CREATE INDEX idx_instances_locked_until_completed_at ON instances (completed_at, locked_until, sticky_until, worker);
 
 -- Update index
-DROP INDEX idx_activities_locked_until_queue;
+DROP INDEX IF EXISTS idx_activities_locked_until_queue;
 
 -- Remove queue column from activities
 ALTER TABLE activities DROP COLUMN queue;
