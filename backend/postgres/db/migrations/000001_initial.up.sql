@@ -3,13 +3,13 @@ CREATE TABLE IF NOT EXISTS "instances" (
   "execution_id" TEXT NOT NULL,
   "parent_instance_id" TEXT NULL,
   "parent_execution_id" TEXT NULL,
-  "parent_schedule_event_id" INTEGER NULL,
+  "parent_schedule_event_id" BIGINT NULL,
   "metadata" TEXT NULL,
-  "state" INTEGER NOT NULL,
-  "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "completed_at" DATETIME NULL,
-  "locked_until" DATETIME NULL,
-  "sticky_until" DATETIME NULL,
+  "state" BIGINT NOT NULL,
+  "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "completed_at" TIMESTAMP NULL,
+  "locked_until" TIMESTAMP NULL,
+  "sticky_until" TIMESTAMP NULL,
   "worker" TEXT NULL,
   PRIMARY KEY("id", "execution_id")
 );
@@ -20,14 +20,14 @@ CREATE INDEX IF NOT EXISTS "idx_instances_parent_instance_id_parent_execution_id
 
 CREATE TABLE IF NOT EXISTS "pending_events" (
   "id" TEXT,
-  "sequence_id" INTEGER NOT NULL, -- not used but keep for now for query compat
+  "sequence_id" BIGINT NOT NULL, -- not used but keep for now for query compat
   "instance_id" TEXT NOT NULL,
   "execution_id" TEXT NOT NULL,
-  "event_type" INTEGER NOT NULL,
-  "timestamp" DATETIME NOT NULL,
-  "schedule_event_id" INT NOT NULL,
-  "attributes" BLOB NOT NULL,
-  "visible_at" DATETIME NULL,
+  "event_type" BIGINT NOT NULL,
+  "timestamp" TIMESTAMP NOT NULL,
+  "schedule_event_id" BIGINT NOT NULL,
+  "attributes" BYTEA NOT NULL,
+  "visible_at" TIMESTAMP NULL,
   PRIMARY KEY("id", "instance_id")
 );
 
@@ -35,14 +35,14 @@ CREATE INDEX IF NOT EXISTS "idx_pending_events_instance_id_execution_id_visible_
 
 CREATE TABLE IF NOT EXISTS "history" (
   "id" TEXT,
-  "sequence_id" INTEGER NOT NULL,
+  "sequence_id" BIGINT NOT NULL,
   "instance_id" TEXT NOT NULL,
   "execution_id" TEXT NOT NULL,
-  "event_type" INTEGER NOT NULL,
-  "timestamp" DATETIME NOT NULL,
-  "schedule_event_id" INT NOT NULL,
-  "attributes" BLOB NOT NULL,
-  "visible_at" DATETIME NULL,
+  "event_type" BIGINT NOT NULL,
+  "timestamp" TIMESTAMP NOT NULL,
+  "schedule_event_id" BIGINT NOT NULL,
+  "attributes" BYTEA NOT NULL,
+  "visible_at" TIMESTAMP NULL,
   PRIMARY KEY("id", "instance_id")
 );
 
@@ -52,15 +52,14 @@ CREATE TABLE IF NOT EXISTS "activities" (
   "id" TEXT PRIMARY KEY,
   "instance_id" TEXT NOT NULL,
   "execution_id" TEXT NOT NULL,
-  "event_type" INTEGER NOT NULL,
-  "timestamp" DATETIME NOT NULL,
-  "schedule_event_id" INT NOT NULL,
-  "attributes" BLOB NOT NULL,
-  "visible_at" DATETIME NULL,
-  "locked_until" DATETIME NULL,
+  "event_type" BIGINT NOT NULL,
+  "timestamp" TIMESTAMP NOT NULL,
+  "schedule_event_id" BIGINT NOT NULL,
+  "attributes" BYTEA NOT NULL,
+  "visible_at" TIMESTAMP NULL,
+  "locked_until" TIMESTAMP NULL,
   "worker" TEXT NULL
 );
-
 
 CREATE INDEX IF NOT EXISTS "idx_activities_id_worker" ON "activities" ("id", "worker");
 CREATE INDEX IF NOT EXISTS "idx_activities_locked_until" ON "activities" ("locked_until");
