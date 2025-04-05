@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log/slog"
 	"strings"
 	"time"
 
@@ -278,15 +279,15 @@ func (b *postgresBackend) RemoveWorkflowInstances(ctx context.Context, options .
 		}
 
 		// Delete from instances, history and attributes tables
-		if _, err := tx.ExecContext(ctx, fmt.Sprintf("DELETE FROM `instances` WHERE %v", whereCondition), args...); err != nil {
+		if _, err := tx.ExecContext(ctx, fmt.Sprintf("DELETE FROM instances WHERE %v", whereCondition), args...); err != nil {
 			return err
 		}
 
-		if _, err := tx.ExecContext(ctx, fmt.Sprintf("DELETE FROM `history` WHERE %v", whereCondition), args...); err != nil {
+		if _, err := tx.ExecContext(ctx, fmt.Sprintf("DELETE FROM history WHERE %v", whereCondition), args...); err != nil {
 			return err
 		}
 
-		if _, err := tx.ExecContext(ctx, fmt.Sprintf("DELETE FROM `attributes` WHERE %v", whereCondition), args...); err != nil {
+		if _, err := tx.ExecContext(ctx, fmt.Sprintf("DELETE FROM attributes WHERE %v", whereCondition), args...); err != nil {
 			return err
 		}
 
@@ -409,7 +410,7 @@ func createInstance(ctx context.Context, tx *sql.Tx, queue workflow.Queue, wfi *
 	// Check for existing instance
 	if err := tx.QueryRowContext(
 		ctx,
-		SQLReplacer("SELECT 1 FROM `instances` WHERE instance_id = ? AND state = ? LIMIT 1"),
+		SQLReplacer("SELECT 1 FROM instances WHERE instance_id = ? AND state = ? LIMIT 1"),
 		wfi.InstanceID,
 		core.WorkflowInstanceStateActive).
 		Scan(new(int)); err != sql.ErrNoRows {
@@ -431,7 +432,7 @@ func createInstance(ctx context.Context, tx *sql.Tx, queue workflow.Queue, wfi *
 
 	_, err = tx.ExecContext(
 		ctx,
-		SQLReplacer("INSERT INTO `instances` (queue, instance_id, execution_id, parent_instance_id, parent_execution_id, parent_schedule_event_id, metadata, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"),
+		SQLReplacer("INSERT INTO instances (queue, instance_id, execution_id, parent_instance_id, parent_execution_id, parent_schedule_event_id, metadata, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"),
 		string(queue),
 		wfi.InstanceID,
 		wfi.ExecutionID,
@@ -459,7 +460,7 @@ func (b *postgresBackend) SignalWorkflow(ctx context.Context, instanceID string,
 	defer tx.Rollback()
 
 	// TODO: Combine this with the event insertion
-	res := tx.QueryRowContext(ctx, SQLReplacer("SELECT execution_id FROM `instances` WHERE instance_id = ? AND state = ? LIMIT 1"), instanceID, core.WorkflowInstanceStateActive)
+	res := tx.QueryRowContext(ctx, SQLReplacer("SELECT execution_id FROM instances WHERE instance_id = ? AND state = ? LIMIT 1"), instanceID, core.WorkflowInstanceStateActive)
 	var executionID string
 	if err := res.Scan(&executionID); err == sql.ErrNoRows {
 		return backend.ErrInstanceNotFound
@@ -506,20 +507,22 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 		args = append(args, string(q))
 	}
 
+	query := SQLReplacer(fmt.Sprintf(`SELECT i.id, i.queue, i.instance_id, i.execution_id, i.parent_instance_id, i.parent_execution_id, i.parent_schedule_event_id, i.metadata, i.sticky_until
+	FROM instances i
+	INNER JOIN pending_events pe ON i.instance_id = pe.instance_id AND i.execution_id = pe.execution_id
+	WHERE
+		state = ? AND i.completed_at IS NULL
+		AND (pe.visible_at IS NULL OR pe.visible_at <= ?)
+		AND (i.locked_until IS NULL OR i.locked_until < ?)
+		AND (i.sticky_until IS NULL OR i.sticky_until < ? OR i.worker = ?)
+		AND (i.queue in (?%s))
+	LIMIT 1
+	FOR UPDATE OF i SKIP LOCKED`, queuePlaceholders))
+
 	// Lock next workflow task by finding an unlocked instance with new events to process.
 	row := tx.QueryRowContext(
 		ctx,
-		SQLReplacer(fmt.Sprintf(`SELECT i.id, i.queue, i.instance_id, i.execution_id, i.parent_instance_id, i.parent_execution_id, i.parent_schedule_event_id, i.metadata, i.sticky_until
-			FROM instances i
-			INNER JOIN pending_events pe ON i.instance_id = pe.instance_id AND i.execution_id = pe.execution_id
-			WHERE
-				state = ? AND i.completed_at IS NULL
-				AND (pe.visible_at IS NULL OR pe.visible_at <= ?)
-				AND (i.locked_until IS NULL OR i.locked_until < ?)
-				AND (i.sticky_until IS NULL OR i.sticky_until < ? OR i.worker = ?)
-				AND (i.queue in (?%s))
-			LIMIT 1
-			FOR UPDATE OF i SKIP LOCKED`, queuePlaceholders)),
+		query,
 		args...,
 	)
 
@@ -533,7 +536,7 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
-
+		slog.Error("error scanning workflow instance", "err", err)
 		return nil, fmt.Errorf("scanning workflow instance: %w", err)
 	}
 
@@ -583,12 +586,13 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 	// Get new events
 	events, err := tx.QueryContext(
 		ctx,
-		SQLReplacer("SELECT pe.event_id, pe.sequence_id, pe.event_type, pe.timestamp, pe.schedule_event_id, a.data, pe.visible_at FROM `pending_events` pe LEFT JOIN `attributes` a ON pe.instance_id = a.instance_id AND pe.execution_id = a.execution_id AND pe.event_id = a.event_id WHERE pe.instance_id = ? AND pe.execution_id = ? AND (pe.visible_at IS NULL OR pe.visible_at <= ?) ORDER BY pe.id"),
+		SQLReplacer("SELECT pe.event_id, pe.sequence_id, pe.event_type, pe.timestamp, pe.schedule_event_id, a.data, pe.visible_at FROM pending_events pe LEFT JOIN attributes a ON pe.instance_id = a.instance_id AND pe.execution_id = a.execution_id AND pe.event_id = a.event_id WHERE pe.instance_id = ? AND pe.execution_id = ? AND (pe.visible_at IS NULL OR pe.visible_at <= ?) ORDER BY pe.id"),
 		instanceID,
 		executionID,
 		now,
 	)
 	if err != nil {
+		slog.Error("error getting new events", "err", err)
 		return nil, fmt.Errorf("getting new events: %w", err)
 	}
 
@@ -623,6 +627,7 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 
 	// Return if there aren't any new events
 	if len(t.NewEvents) == 0 {
+		slog.Info("no new events")
 		return nil, nil
 	}
 
@@ -632,9 +637,12 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 	if err := row.Scan(
 		&lastSequenceID,
 	); err != nil {
+		slog.Error("error getting most recent sequence id", "err", err)
+
 		if err != sql.ErrNoRows {
 			return nil, fmt.Errorf("getting most recent sequence id: %w", err)
 		}
+		return nil, err
 	}
 
 	if lastSequenceID.Valid {
@@ -642,9 +650,10 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 	}
 
 	if err := tx.Commit(); err != nil {
+		slog.Error("error committing workflow task", "err", err)
 		return nil, err
 	}
-
+	slog.Info("all ok")
 	return t, nil
 }
 
