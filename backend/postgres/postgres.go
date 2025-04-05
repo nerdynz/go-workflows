@@ -111,6 +111,7 @@ type postgresBackend struct {
 func (mb *postgresBackend) FeatureSupported(feature backend.Feature) bool {
 	return true
 }
+
 func (mb *postgresBackend) Close() error {
 	return mb.db.Close()
 }
@@ -140,9 +141,10 @@ func (mb *postgresBackend) Migrate() error {
 		}
 	}
 
-	if err := db.Close(); err != nil {
-		return fmt.Errorf("closing schema database: %w", err)
-	}
+	// its the same db, so we don't need to close it
+	// if err := db.Close(); err != nil {
+	// 	return fmt.Errorf("closing schema database: %w", err)
+	// }
 
 	return nil
 }
