@@ -8,7 +8,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log/slog"
 	"strings"
 	"time"
 
@@ -536,7 +535,7 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
-		slog.Error("error scanning workflow instance", "err", err)
+
 		return nil, fmt.Errorf("scanning workflow instance: %w", err)
 	}
 
@@ -592,7 +591,7 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 		now,
 	)
 	if err != nil {
-		slog.Error("error getting new events", "err", err)
+
 		return nil, fmt.Errorf("getting new events: %w", err)
 	}
 
@@ -627,7 +626,6 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 
 	// Return if there aren't any new events
 	if len(t.NewEvents) == 0 {
-		slog.Info("no new events")
 		return nil, nil
 	}
 
@@ -637,7 +635,6 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 	if err := row.Scan(
 		&lastSequenceID,
 	); err != nil {
-		slog.Error("error getting most recent sequence id", "err", err)
 
 		if err != sql.ErrNoRows {
 			return nil, fmt.Errorf("getting most recent sequence id: %w", err)
@@ -650,10 +647,9 @@ func (b *postgresBackend) GetWorkflowTask(ctx context.Context, queues []workflow
 	}
 
 	if err := tx.Commit(); err != nil {
-		slog.Error("error committing workflow task", "err", err)
+
 		return nil, err
 	}
-	slog.Info("all ok")
 	return t, nil
 }
 
